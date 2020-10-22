@@ -21,6 +21,8 @@ public class UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	
 
 	public UserDetailsDTO createUserDetails(UserDetailsDTO userDetailsDto) throws InvalidUserDetailsDTOException {
 

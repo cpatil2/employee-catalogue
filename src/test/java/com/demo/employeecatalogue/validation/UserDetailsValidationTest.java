@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class UserDetailsValidationTest {
 
 	Boolean actual;
+	
 
 	@BeforeEach
 	public void init_beforeEachTestMethod() {
