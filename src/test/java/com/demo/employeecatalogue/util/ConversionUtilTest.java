@@ -24,9 +24,14 @@ class ConversionUtilTest {
 		UserDetailsDTO userDetailsDto = new UserDetailsDTO(3, "Sachin", LocalDate.of(1980, 3, 19), "342142",
 				"sdfs@sdf");
 		UserDetails userDetails = ConversionUtil.convertUserDetailsDtoToEntity(userDetailsDto);
-		assertEquals(new UserDetails("Sachin", LocalDate.of(1980, 3, 19), "342142", "sdfs@sdf"), userDetails);
+		assertEquals("Sachin", userDetails.getName());
+		assertEquals(LocalDate.of(1980, 3, 19), userDetails.getDob());
+		assertEquals("342142", userDetails.getMobile());
+		assertEquals("sdfs@sdf", userDetails.getEmail());
+		
+
 	}
-	
+
 	@Test
 	void testConvertUserDetailsEntityToDto_withNullEntity() {
 		UserDetails userDetails = null;
@@ -37,11 +42,16 @@ class ConversionUtilTest {
 	@Test
 	void testConvertUserDetailsEntityToDto() {
 
-		UserDetails userDetails = new UserDetails("Sachin", LocalDate.of(1980, 3, 19), "342142",
-				"sdfs@sdf");
+		UserDetails userDetails = new UserDetails("Sachin", LocalDate.of(1980, 3, 19), "342142", "sdfs@sdf");
 		UserDetailsDTO userDetailsDto = ConversionUtil.convertUserDetailsEntityToDto(userDetails);
 		userDetailsDto.setUserId(3);
-		assertEquals(new UserDetailsDTO(3,"Sachin", LocalDate.of(1980, 3, 19), "342142", "sdfs@sdf"), userDetailsDto);
+		//assertEquals(new UserDetailsDTO(3, "Sachin", LocalDate.of(1980, 3, 19), "342142", "sdfs@sdf"), userDetailsDto);
+	
+		assertEquals(3, userDetailsDto.getUserId());
+		assertEquals("Sachin", userDetailsDto.getName());
+		assertEquals(LocalDate.of(1980, 3, 19), userDetailsDto.getDob());
+		assertEquals("342142", userDetailsDto.getMobile());
+		assertEquals("sdfs@sdf", userDetailsDto.getEmail());
 	}
 
 }
