@@ -20,6 +20,7 @@ import com.demo.employeecatalogue.exception.InvalidUserDetailsDTOException;
 import com.demo.employeecatalogue.exception.ResourceNotFoundException;
 import com.demo.employeecatalogue.service.UserDetailsService;
 
+
 @RestController
 public class UserDetailsController {
 
