@@ -2,6 +2,7 @@ package com.demo.employeecatalogue.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	
 
 	public UserDetailsDTO createUserDetails(UserDetailsDTO userDetailsDto) throws InvalidUserDetailsDTOException {
 
@@ -122,18 +125,23 @@ public class UserDetailsService {
 
 	public UserDetailsDTO getUserDetailsByMobile(String mobile)
 			throws ResourceNotFoundException, InvalidArgumentException {
+		
+		
 
 		if (UserDetailsValidation.isValidMobileArgument(mobile)) {
 			// check if user exists otherwise throw exception
-			UserDetails userDetails = userRepository.findByMobile(mobile)
-					.orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
+			Optional<UserDetails> userDetails = Optional.of(userRepository.findByMobile(mobile)
+					.orElseThrow(() -> new ResourceNotFoundException("Resource Not Found")));
 
-			return ConversionUtil.convertUserDetailsEntityToDto(userDetails);
+			return ConversionUtil.convertUserDetailsEntityToDto(userDetails.get());
 		} else {
 			throw new InvalidArgumentException("Invalid mobile argument");
 		}
 
 	}
+	
+	
+	
 	
 	
 
